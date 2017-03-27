@@ -46,6 +46,7 @@ body {
 
   .published {
     margin-left: 9px;
+    margin-top: 25px;
     width: 280px;
     height: 8px;
     font-family: 'Arial Bold', 'Arial';
@@ -55,5 +56,55 @@ body {
     color: #868686;
     line-height: 5px;
   }
+
+  .show .title {
+    margin-left: 18px;
+    width: 280px;
+    height: 31px;
+    font-family: 'Helvetica Bold', 'Helvetica';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 24px;
+    color: #5E5E5E;
+    line-height: 24px;
+  }
+
+
 }
+
+.show .published {
+  margin-left: 18px;
+  width: 280px;
+  height: 26px;
+  font-family: 'Arial Bold', 'Arial';
+  font-weight: 700;
+  font-style: normal;
+  font-size: 15px;
+  color: #868686;
+  line-height: 26px;
+}
+
+.show .description {
+  margin-left: 18px;
+  width: 280px;
+  height: 156px;
+  font-size: 15px;
+  color: #868686;
+  line-height: 26px;
+}
+
+ button {
+   margin-left: 18px;
+   text-decoration: underline;
+   border: none;
+   background: none;
+   margin-top: 12px;
+   height: 26px;
+   font-family: 'Arial Bold', 'Arial';
+   font-weight: 700;
+   font-style: normal;
+   font-size: 15px;
+   text-decoration: underline;
+   color: #868686;
+   line-height: 26px;
 }
