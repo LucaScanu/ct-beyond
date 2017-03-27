@@ -7,10 +7,27 @@ function getData(){
     if (req.status === 200) {
       var data = req.responseText;
       var jsonResponse = JSON.parse(data);
-      console.log(jsonResponse);
+      setUpPage(jsonResponse.items);
     } else {
       console.log('Request failed.  Returned status of ' + req.status);
     }
   };
   req.send();
+}
+
+function setUpPage(data){
+  var main = document.getElementById('main');
+  var title = document.createElement('h1');
+  var text = document.createTextNode('My YouTube Playlist');
+  title.appendChild(text);
+  main.appendChild(title);
+  displayThumbnail(main, data);
+}
+
+function displayThumbnail(main, data){
+  data.forEach(function(){
+    var div = document.createElement('div');
+    div.classList.add('index');
+    main.appendChild(div);
+  });
 }
