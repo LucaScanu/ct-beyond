@@ -19,7 +19,8 @@ function setUpPage(data){
   console.log(data);
   var main = document.getElementById('main');
   var title = document.createElement('h1');
-  var text = document.createTextNode('My YouTube Playlist');
+  title.classList.add('playlist-text');
+  var text = document.createTextNode('My YouTube playlist');
   title.appendChild(text);
   main.appendChild(title);
   displayTile(main, data);
