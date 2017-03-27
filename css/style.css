@@ -2,6 +2,7 @@ body {
   font-family: Arial;
   margin: 0px;
 }
+
 @media only screen and (max-width: 481px) {
 
   .playlist-text {
@@ -16,19 +17,20 @@ body {
     color: #5E5E5E;
   }
 
-  .index {
+  .list {
     border: 1px solid LightGrey;
-    width: 320px;
+    width: 88%;
     height: 275px;
     margin-bottom: 10px;
   }
-  .index .description {
+
+  .list .description {
     display: none;
   }
 
   img {
-    width: 300px;
-    height: 198px;
+    width: 95%;
+    height: 70%;
     margin-left: 9px;
   }
 
@@ -69,42 +71,177 @@ body {
     line-height: 24px;
   }
 
+  .show .published {
+    margin-left: 18px;
+    width: 280px;
+    height: 26px;
+    font-family: 'Arial Bold', 'Arial';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 15px;
+    color: #868686;
+    line-height: 26px;
+  }
+
+  .show .description {
+    margin-left: 18px;
+    width: 280px;
+    height: 156px;
+    font-size: 15px;
+    color: #868686;
+    line-height: 26px;
+  }
+
+  button {
+    margin-left: 18px;
+    text-decoration: underline;
+    border: none;
+    background: none;
+    margin-top: 12px;
+    height: 26px;
+    font-family: 'Arial Bold', 'Arial';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 15px;
+    text-decoration: underline;
+    color: #868686;
+    line-height: 26px;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 768px){
+  .playlist-text {
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 280px;
+    height: 29px;
+    font-family: 'Helvetica Bold', 'Helvetica';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 24px;
+    color: #5E5E5E;
+  }
+
+  .list {
+    width: 70%;
+    height: 287px;
+    border: 1px solid LightGray;
+    overflow: auto;
+    margin-bottom: 10px;
+  }
+
+  img {
+    width: 95%;
+    height: 92%;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+
+  .list .title {
+    width: 100%;
+    height: 15px;
+    font-family: 'Helvetica Bold', 'Helvetica';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 24px;
+    color: #5E5E5E;
+    /*float: right;*/
+    margin-right: 20px;
+    margin-bottom: 11px;
+  }
+
+  .list .published {
+    /*float: right;*/
+    padding: 0;
+    margin: 25px 20px 0 0;
+    width: 100%;
+    /*clear: both;*/
+    font-family: 'Arial Bold', 'Arial';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 15px;
+    color: #868686;
+    line-height: 26px;
+  }
+
+  .list .description {
+    /*float: right;*/
+    /*margin: 25px 20px 0 0;
+    padding: 0;
+    width: 35%;
+    clear: both;
+    font-size: 15px;
+    color: #868686;
+    line-height: 26px;*/
+    display:none;
+  }
 
 }
 
-.show .published {
-  margin-left: 18px;
-  width: 280px;
-  height: 26px;
-  font-family: 'Arial Bold', 'Arial';
-  font-weight: 700;
-  font-style: normal;
-  font-size: 15px;
-  color: #868686;
-  line-height: 26px;
-}
 
-.show .description {
-  margin-left: 18px;
-  width: 280px;
-  height: 156px;
-  font-size: 15px;
-  color: #868686;
-  line-height: 26px;
-}
+@media only screen and (min-width: 768px) {
+  .playlist-text {
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 280px;
+    height: 29px;
+    font-family: 'Helvetica Bold', 'Helvetica';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 24px;
+    color: #5E5E5E;
+  }
 
- button {
-   margin-left: 18px;
-   text-decoration: underline;
-   border: none;
-   background: none;
-   margin-top: 12px;
-   height: 26px;
-   font-family: 'Arial Bold', 'Arial';
-   font-weight: 700;
-   font-style: normal;
-   font-size: 15px;
-   text-decoration: underline;
-   color: #868686;
-   line-height: 26px;
+  .list {
+    width: 70%;
+    height: 300px;
+    border: 1px solid LightGray;
+    overflow: auto;
+    margin-bottom: 10px;
+  }
+
+  img {
+    width: 55%;
+    height: 92%;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+
+  .list .title {
+    width: 35%;
+    height: 25px;
+    font-family: 'Helvetica Bold', 'Helvetica';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 24px;
+    color: #5E5E5E;
+    float: right;
+    margin-right: 20px;
+    margin-bottom: 11px;
+  }
+
+  .list .published {
+    float: right;
+    padding: 0;
+    margin: 25px 20px 0 0;
+    width: 35%;
+    clear: both;
+    font-family: 'Arial Bold', 'Arial';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 15px;
+    color: #868686;
+    line-height: 26px;
+  }
+
+  .list .description {
+    float: right;
+    margin: 25px 20px 0 0;
+    padding: 0;
+    width: 35%;
+    clear: both;
+    font-size: 15px;
+    color: #868686;
+    line-height: 26px;
+  }
 }

@@ -29,7 +29,7 @@ function setUpPage(data){
 function displayTile(main, data){
   data.forEach(function(data){
     var div = document.createElement('div');
-    div.classList.add('index');
+    div.classList.add('list');
     main.appendChild(div);
     addTitle(data, div);
 
@@ -115,14 +115,14 @@ function addDescription(data, div){
   var text = document.createTextNode(data.snippet.description);
   description.appendChild(text);
   div.appendChild(description);
-  checkText(description);
-  if (div.classList.contains('index')){
+  checkText(div, description);
+  if (div.classList.contains('list')){
     addThumbnail(data, div);
   }
 }
 
-function checkText(description){
-  if(description.innerHTML.length >157) {
+function checkText(div, description){
+  if(div.classList.contains('list') && description.innerHTML.length >157) {
     description.innerHTML = description.innerHTML.substring(0,157)+'...';
   }
 }
