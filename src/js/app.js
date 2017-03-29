@@ -1,4 +1,6 @@
+var globalData = [];
 getData();
+keyboardNavigation(globalData);
 
 function getData(){
   var req = new XMLHttpRequest();
@@ -8,7 +10,7 @@ function getData(){
       var data = req.responseText;
       var jsonResponse = JSON.parse(data);
       setUpPage(jsonResponse.items);
-      keyboardNavigation(jsonResponse.items);
+      globalData.push(jsonResponse.items);
     } else {
       console.log('Request failed.  Returned status of ' + req.status);
     }
@@ -16,12 +18,13 @@ function getData(){
   req.send();
 }
 
+console.log('data array', globalData);
 function setUpPage(data){
   console.log(data);
   var main = document.getElementById('main');
   var title = document.createElement('h1');
   // title.setAttribute('tabindex', '0');
-  var parentDiv = document.createElement('ul');
+  var parentDiv = document.createElement('div');
   title.classList.add('playlist-text');
   var text = document.createTextNode('My YouTube playlist');
   title.appendChild(text);
@@ -29,22 +32,28 @@ function setUpPage(data){
   parentDiv.appendChild(title);
   parentDiv.classList.add('parentDiv');
   // parentDiv.setAttribute('tabindex', '0');
-  displayTile(parentDiv, data);
+  createTile(parentDiv, data);
 }
 
 
 function keyboardNavigation(data){
+  console.log('data keyboard', data)
   // console.log('data', data[2]);
   // document.addEventListener('keydown', function(e){
   //   if (e.keyCode === 9) {
   //     console.log('this', this);
   // var focus = document.activeElement;
   document.addEventListener('keydown', function(e){
-    if (e.keyCode === 13) {
+    if (document.activeElement.id == 9) {
+      console.log('after 9', document.activeElement.parentNode.firstChild.nextSibling);
+      document.activeElement.parentNode.firstChild.nextSibling.focus();
+    }
+    console.log('active', window.activeElement);
+    if (e.keyCode === 13 && document.activeElement.classList.contains('list')) {
       console.log('active', document.activeElement);
       console.log('active id', document.activeElement.id);
       var i = document.activeElement.id;
-      var data2 = data[i];
+      var data2 = data[0][i];
       // console.log(data2);
       listenerFunction(data2);
       // console.log('enter', activeElement.first);
@@ -55,10 +64,10 @@ function keyboardNavigation(data){
 // });
 // }
 
-function displayTile(parentDiv, data){
+function createTile(parentDiv, data){
   var idCounter = 0;
   data.forEach(function(data){
-    var div = document.createElement('li');
+    var div = document.createElement('div');
     div.classList.add('list', 'col-s-9', 'col-m-7', 'col-l-7');
     div.setAttribute('id', idCounter++);
     div.setAttribute('tabindex', '0');
