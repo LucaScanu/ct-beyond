@@ -8,7 +8,6 @@ button {
   text-decoration: underline;
   border: none;
   background: none;
-  margin-top: 12px;
   height: 26px;
   font-family: 'Arial Bold', 'Arial';
   font-weight: 700;
@@ -17,6 +16,36 @@ button {
   text-decoration: underline;
   color: #868686;
   line-height: 26px;
+  cursor: pointer;
+  padding: 10px;
+  padding: 20px 0 33px 0;
+}
+
+.list {
+  cursor: pointer;
+}
+
+.selected {
+  background: blue;
+}
+
+@media only screen and (max-width: 481px) {
+  [class*="col-"] {
+      width: 100%
+  }
+}
+
+@media only screen and (min-width: 481px) {
+   .col-m-7 {width: 58.33%;
+  min-width: 404.05px}
+   .col-m-8 {width: 66.66%;}
+   .col-m-9 {width: 75%;}
+   .col-m-10 {width: 83.33%;}
+}
+
+@media only screen and (min-width: 768px) {
+  .col-l-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
 }
 
 
@@ -36,8 +65,9 @@ button {
 
   .list {
     border: 1px solid LightGrey;
-    width: 88%;
-    height: 275px;
+    width: 85%;
+    /*width: 74.7%;*/
+    height: 260px;
     margin-bottom: 10px;
   }
 
@@ -58,7 +88,8 @@ button {
     font-family: 'Arial Bold', 'Arial';
     font-weight: 700;
     font-style: normal;
-    font-size: 18px;
+    /*font-size: 18px;*/
+    font-size: 1.125em;
     color: #5E5E5E;
     line-height: 20px;
   }
@@ -115,7 +146,7 @@ button {
   }
 }
 
-@media only screen and (min-width: 481px) and (max-width: 768px){
+@media only screen and (min-width: 481px){
   .playlist-text {
     margin-left: 10px;
     margin-top: 10px;
@@ -129,16 +160,17 @@ button {
   }
 
   .list {
-    width: 70%;
+    /*width: 70%;*/
+    /*width: 66.4%;*/
     height: 287px;
     border: 1px solid LightGray;
-    overflow: auto;
+    /*overflow: auto;*/
     margin-bottom: 10px;
   }
 
   img {
     width: 95%;
-    height: 92%;
+    height: 65%;
     margin-left: 10px;
     margin-top: 10px;
   }
@@ -149,7 +181,8 @@ button {
     font-family: 'Helvetica Bold', 'Helvetica';
     font-weight: 700;
     font-style: normal;
-    font-size: 24px;
+    /*font-size: 24px;*/
+    font-size: 1.188em;
     color: #5E5E5E;
     margin-left: 10px;
     margin-right: 20px;
@@ -236,7 +269,8 @@ button {
   }
 
   .list {
-    width: 70%;
+    /*width: 70%;*/
+    /*width: 58.1%;*/
     height: 300px;
     border: 1px solid LightGray;
     overflow: auto;
@@ -251,7 +285,7 @@ button {
   }
 
   .list .title {
-    width: 35%;
+    width: 36%;
     height: 25px;
     font-family: 'Helvetica Bold', 'Helvetica';
     font-weight: 700;
@@ -259,15 +293,15 @@ button {
     font-size: 24px;
     color: #5E5E5E;
     float: right;
-    margin-right: 20px;
+    /*margin-right: 20px;*/
     margin-bottom: 11px;
   }
 
   .list .published {
     float: right;
     padding: 0;
-    margin: 25px 20px 0 0;
-    width: 35%;
+    margin: 78px 20px 0 0;
+    width: 36%;
     clear: both;
     font-family: 'Arial Bold', 'Arial';
     font-weight: 700;
@@ -281,7 +315,7 @@ button {
     float: right;
     margin: 25px 20px 0 0;
     padding: 0;
-    width: 35%;
+    width: 36%;
     clear: both;
     font-size: 15px;
     color: #868686;
@@ -326,4 +360,32 @@ button {
     line-height: 26px;
     float: right;
   }
+
+
+  main:hover {
+    filter: blur(0px);
+  }
+  .list {
+     filter: blur(0px);
+  }
+  .list:hover {
+     filter: blur(5px);
+  }
+
+main:hover > .list {
+  filter: blur(3px);
+}
+
+main:hover > .list:hover {
+  filter: blur(0px);
+}
+/*
+.childDiv {
+  border: 1px solid black;
+  overflow: auto;
+}*/
+
+/*main:hover {
+  background: blue;
+}*/
 }
