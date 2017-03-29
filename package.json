@@ -1,0 +1,23 @@
+{
+  "name": "ct-beyond",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarahemilym/ct-beyond.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sarahemilym/ct-beyond/issues"
+  },
+  "homepage": "https://github.com/sarahemilym/ct-beyond#readme",
+  "devDependencies": {
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.5.0"
+  }
+}

@@ -8,6 +8,7 @@ function getData(){
       var data = req.responseText;
       var jsonResponse = JSON.parse(data);
       setUpPage(jsonResponse.items);
+      keyboardNavigation(jsonResponse.items);
     } else {
       console.log('Request failed.  Returned status of ' + req.status);
     }
@@ -33,23 +34,26 @@ function setUpPage(data){
 
 
 function keyboardNavigation(data){
-  console.log('getting here');
+  // console.log('data', data[2]);
+  // document.addEventListener('keydown', function(e){
+  //   if (e.keyCode === 9) {
+  //     console.log('this', this);
+  // var focus = document.activeElement;
   document.addEventListener('keydown', function(e){
-    if (e.keyCode === 9) {
-      //     console.log('this', this);
-      // var focus = document.activeElement;
-      var focus = document.activeElement.focus();
-      console.log('focus', focus);
-      document.addEventListener('keydown', function(e){
-        if (e.keyCode === 13) {
-          listenerFunction(data);
-          // console.log('enter', activeElement.first);
-          // document.activeElement.focus();
-        }
-      });
+    if (e.keyCode === 13) {
+      console.log('active', document.activeElement);
+      console.log('active id', document.activeElement.id);
+      var i = document.activeElement.id;
+      var data2 = data[i];
+      // console.log(data2);
+      listenerFunction(data2);
+      // console.log('enter', activeElement.first);
+      // document.activeElement.focus();
     }
   });
 }
+// });
+// }
 
 function displayTile(parentDiv, data){
   var idCounter = 0;
@@ -76,17 +80,15 @@ function addTitle(data, div){
 }
 
 function setDate(data, div){
-  var num = document.createTextNode(data.snippet.publishedAt);
-  // console.log(num)
-  var numS = num.split(0,3);
-  // var month = num.getMonth();
-  console.log(numS);
-  // var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  // var splitDate = date.indexOf('T');
-  // var newDate = num.substring(0, 9);
-  // var newDate = date.substr(0,9);
-  // console.log(newDate)
-  // var newDate = num.substr(num.indexOf('T'));
+  var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  // var num = new DateTime(data.snippet.publishedAt);
+  var date = new Date(data.snippet.publishedAt);
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+  var newDate = 'Published on ' + day + ' ' + months[monthIndex] + ', ' + year;
+  console.log('new', newDate)
+  addPublished(newDate, data, div);
 }
 
 function addListener(div, data){
@@ -95,7 +97,6 @@ function addListener(div, data){
       listenerFunction(data);
     };
   }
-  keyboardNavigation(data);
 }
 
 function listenerFunction(data) {
@@ -142,10 +143,10 @@ function backToButton(main){
   };
 }
 
-function addPublished(data, div){
+function addPublished(newDate, data, div){
   var published = document.createElement('p');
   published.classList.add('published');
-  var text = document.createTextNode(data.contentDetails.videoPublishedAt);
+  var text = document.createTextNode(newDate);
   published.appendChild(text);
   div.appendChild(published);
   if (div.classList.contains('show')){

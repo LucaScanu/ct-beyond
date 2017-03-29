@@ -370,16 +370,10 @@ button {
   .parentDiv:hover {
     filter: blur(0px);
   }
-  .parentDiv:focus {
-    filter: blur(0px);
-  }
   .list {
      filter: blur(0px);
   }
   .list:hover {
-     filter: blur(5px);
-  }
-  .list:focus {
      filter: blur(5px);
   }
 
@@ -387,15 +381,7 @@ button {
   filter: blur(5px);
 }
 
-.parentDiv:focus > .list {
-  filter: blur(5px);
-}
-
 .parentDiv:hover > .list:hover {
-  filter: blur(0px);
-}
-
-.parentDiv:focus > .list:hover {
   filter: blur(0px);
 }
 
