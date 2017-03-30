@@ -37,7 +37,7 @@ function setUpPage(data){
 
 
 function keyboardNavigation(data){
-  console.log('data keyboard', data)
+  console.log('data keyboard', data);
   // console.log('data', data[2]);
   // document.addEventListener('keydown', function(e){
   //   if (e.keyCode === 9) {
@@ -96,7 +96,7 @@ function setDate(data, div){
   var monthIndex = date.getMonth();
   var year = date.getFullYear();
   var newDate = 'Published on ' + day + ' ' + months[monthIndex] + ', ' + year;
-  console.log('new', newDate)
+  console.log('new', newDate);
   addPublished(newDate, data, div);
 }
 
