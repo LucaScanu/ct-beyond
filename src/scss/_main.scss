@@ -1,3 +1,33 @@
 body {
-  background: blue;
+  font-family: Arial;
+  margin: 0px;
+}
+
+button {
+  margin-left: 18px;
+  text-decoration: underline;
+  border: none;
+  background: none;
+  height: 26px;
+  font-family: 'Arial Bold', 'Arial';
+  font-weight: 700;
+  font-style: normal;
+  font-size: 15px;
+  text-decoration: underline;
+  color: #868686;
+  line-height: 26px;
+  cursor: pointer;
+  padding: 20px 0 33px 0;
+}
+
+.playlist-text {
+  margin-left: 9px;
+  margin-top: 10px;
+  width: 280px;
+  height: 29px;
+  font-family: 'Helvetica Bold', 'Helvetica';
+  font-weight: 700;
+  font-style: normal;
+  font-size: 24px;
+  color: #5E5E5E;
 }

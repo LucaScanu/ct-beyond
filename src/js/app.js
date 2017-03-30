@@ -37,12 +37,6 @@ function setUpPage(data){
 
 
 function keyboardNavigation(data){
-  console.log('data keyboard', data);
-  // console.log('data', data[2]);
-  // document.addEventListener('keydown', function(e){
-  //   if (e.keyCode === 9) {
-  //     console.log('this', this);
-  // var focus = document.activeElement;
   document.addEventListener('keydown', function(e){
     if (document.activeElement.id == 9) {
       console.log('after 9', document.activeElement.parentNode.firstChild.nextSibling);
@@ -54,21 +48,16 @@ function keyboardNavigation(data){
       console.log('active id', document.activeElement.id);
       var i = document.activeElement.id;
       var data2 = data[0][i];
-      // console.log(data2);
       listenerFunction(data2);
-      // console.log('enter', activeElement.first);
-      // document.activeElement.focus();
     }
   });
 }
-// });
-// }
 
 function createTile(parentDiv, data){
   var idCounter = 0;
   data.forEach(function(data){
     var div = document.createElement('div');
-    div.classList.add('list', 'col-s-9', 'col-m-7', 'col-l-7');
+    div.classList.add('list', 'col-s-9', 'col-m-8', 'col-l-7');
     div.setAttribute('id', idCounter++);
     div.setAttribute('tabindex', '0');
     div.setAttribute('role', 'link');
