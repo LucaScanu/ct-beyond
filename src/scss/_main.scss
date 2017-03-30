@@ -1,6 +1,8 @@
 body {
   font-family: Arial;
   margin: 0px;
+  // background: black;
+  background: white;
 }
 
 button {
@@ -21,13 +23,93 @@ button {
 }
 
 .playlist-text {
-  margin-left: 9px;
-  margin-top: 10px;
-  width: 280px;
-  height: 29px;
-  font-family: 'Helvetica Bold', 'Helvetica';
+  // margin-left: 9px;
+  // margin-top: 10px;
+  // width: 100%;
+  // height: 29px;
+  // font-family: 'Helvetica Bold', 'Helvetica';
+  // font-weight: 700;
+  // font-style: normal;
+  // font-size: 24px;
+  // color: #5E5E5E;
+  // background: url('../images/music.jpg') no-repeat center center fixed;
+  // background-size: cover;
+
+
+  //  BLACK AND WHITE OPTION
+
+
+  // margin: 0 0 10px 0;
+  // width: 100%;
+  // height: 216px;
+  // font-family: 'Helvetica Bold',Helvetica;
+  // font-weight: 700;
+  // font-style: normal;
+  // font-size: 25px;
+  // color: #d0d0d0;
+  // background: url(../images/alice-moore.jpg);
+  // background-repeat: no-repeat;
+  // background-size: contain;
+  // background-position: center;
+  // background-size: cover;
+  // line-height: 18;
+  // border-bottom: 8px solid #d0d0d0;
+  // padding: 20px;
+  //
+  // @media only screen and (min-width: 481px) {
+  //
+  //   margin: 0 0 10px 0;
+  //   width: 100%;
+  //   height: 345px;
+  //   font-family: 'Helvetica Bold',Helvetica;
+  //   font-weight: 700;
+  //   font-style: normal;
+  //   font-size: 40px;
+  //   color: #d0d0d0;
+  //   background: url(../images/alice-moore.jpg) no-repeat center center fixed;
+  //   background-position-y: -231px;
+  //   background-position-x: 222px;
+  //   background-size: cover;
+  //   line-height: 17;
+  //   padding-left: 45px;
+  //   border-bottom: 8px solid #d0d0d0;
+  // }
+
+
+  // COLOUR OPTION
+
+  margin: 0 0 10px 0;
+  width: 100%;
+  height: 216px;
+  font-family: 'Helvetica Bold',Helvetica;
   font-weight: 700;
   font-style: normal;
-  font-size: 24px;
-  color: #5E5E5E;
+  font-size: 25px;
+  color: #A5ffD6;
+  background: url(../images/alice-moore.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  line-height: 18;
+  border-bottom: 8px solid #A5ffD6;
+  padding: 20px;
+  // background-attachment: fixed;
+
+  @media only screen and (min-width: 481px) {
+    height: 345px;
+    font-size: 40px;
+    color: #A5ffD6;
+    line-height: 17;
+    padding-left: 45px;
+    border-bottom: 8px solid #A5ffD6;
+  }
+}
+
+footer {
+  background: url(../images/pink.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
 }
