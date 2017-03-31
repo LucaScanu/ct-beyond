@@ -85,31 +85,40 @@ button {
   font-weight: 700;
   font-style: normal;
   font-size: 25px;
-  color: #A5ffD6;
+  color: $primary-color;
   background: url(../images/alice-moore.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
   line-height: 18;
-  border-bottom: 8px solid #A5ffD6;
+  border-bottom: 8px solid $primary-color;
   padding: 20px;
   // background-attachment: fixed;
 
   @media only screen and (min-width: 481px) {
     height: 345px;
     font-size: 40px;
-    color: #A5ffD6;
+    color: $primary-color;
     line-height: 17;
     padding-left: 45px;
-    border-bottom: 8px solid #A5ffD6;
+    border-bottom: 8px solid $primary-color;
   }
 }
 
 footer {
   background: url(../images/pink.png);
+  // bottom: 0px;
   background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
+  // background-attachment: fixed;
   background-size: cover;
+  border-top: 7px solid $primary-color;
+  // height: 110px;
+  // width: 100%;
+
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  height:30px;
+  width:100%;
 }

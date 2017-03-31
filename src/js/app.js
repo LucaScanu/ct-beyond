@@ -56,28 +56,32 @@ function keyboardNavigation(data){
 function createTile(parentDiv, data){
   var idCounter = 0;
   data.forEach(function(data){
-    var div = document.createElement('div');
-    div.classList.add('list', 'col-s-9', 'col-m-8', 'col-l-7');
-    div.setAttribute('id', idCounter++);
-    div.setAttribute('tabindex', '0');
-    div.setAttribute('role', 'link');
-    parentDiv.appendChild(div);
-    addListener(div, data);
-    addTitle(data, div);
+    var ul = document.createElement('ul');
+    ul.classList.add('list', 'col-s-9', 'col-m-8', 'col-l-7');
+    ul.setAttribute('id', idCounter++);
+    ul.setAttribute('tabindex', '0');
+    ul.setAttribute('role', 'ulnk');
+    parentDiv.appendChild(ul);
+    addListener(ul, data);
+    addTitle(data, ul);
   });
 }
 
-function addTitle(data, div){
-  var title = document.createElement('h1');
-  title.classList.add('title');
+function addTitle(data, ul){
+  var title = document.createElement('li');
+  if (ul.classList.contains('list')) {
+    title.classList.add('list__item--title');
+  } else {
+    title.classList.add('show__item--title');
+  }
   var text = document.createTextNode(data.snippet.title);
   title.appendChild(text);
-  div.appendChild(title);
-  setDate(data, div);
+  ul.appendChild(title);
+  setDate(data, ul);
   // addPublished(data, div);
 }
 
-function setDate(data, div){
+function setDate(data, ul){
   var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   // var num = new DateTime(data.snippet.publishedAt);
   var date = new Date(data.snippet.publishedAt);
@@ -86,12 +90,12 @@ function setDate(data, div){
   var year = date.getFullYear();
   var newDate = 'Published on ' + day + ' ' + months[monthIndex] + ', ' + year;
   console.log('new', newDate);
-  addPublished(newDate, data, div);
+  addPublished(newDate, data, ul);
 }
 
-function addListener(div, data){
-  if (div) {
-    div.onclick = function(){
+function addListener(ul, data){
+  if (ul) {
+    ul.onclick = function(){
       listenerFunction(data);
     };
   }
@@ -105,31 +109,35 @@ function listenerFunction(data) {
 
 function openShowPage(main, data){
   backToButton(main);
-  var div = document.createElement('div');
-  div.classList.add('show');
-  main.appendChild(div);
-  addTitle(data, div);
+  var ul = document.createElement('ul');
+  ul.classList.add('show');
+  main.appendChild(ul);
+  addTitle(data, ul);
 }
 
-function addVideo(data, div){
+function addVideo(data, ul){
+  console.log('getting here');
+  var li = document.createElement('li');
+  li.classList.add('show__item');
   var videoId = data.contentDetails.videoId;
   var iframe = document.createElement('iframe');
-  iframe.classList.add('video');
+  iframe.classList.add('show__item--iframe');
   iframe.src = 'https://www.youtube.com/embed/' + videoId;
-  div.appendChild(iframe);
-  addDescription(data, div);
-  setTimeout(checkiFrame.bind(null, iframe), 4000);
+  li.appendChild(iframe);
+  ul.appendChild(li);
+  addDescription(data, ul);
+  // setTimeout(checkiFrame.bind(null, iframe), 4000);
   // setTimeout(checkiFrame(iframe), 3000);
   // setTimeout('checkiFrame();', 100);
 }
 
-function checkiFrame(iframe){
-  if (  iframe.readyState  === 200 ) {
-    console.log('iframe has loaded');
-  } else {
-    console.log('iframe hasnt loaded');
-  }
-}
+// function checkiFrame(iframe){
+//   if (  iframe.readyState  === 200 ) {
+//     console.log('iframe has loaded');
+//   } else {
+//     console.log('iframe hasnt loaded');
+//   }
+// }
 
 function backToButton(main){
   var button = document.createElement('button');
@@ -141,40 +149,51 @@ function backToButton(main){
   };
 }
 
-function addPublished(newDate, data, div){
-  var published = document.createElement('p');
-  published.classList.add('published');
+function addPublished(newDate, data, ul){
+  var published = document.createElement('li');
+  if (ul.classList.contains('list')) {
+    published.classList.add('list__item--published');
+  } else {
+    published.classList.add('show__item--published');
+  }
   var text = document.createTextNode(newDate);
   published.appendChild(text);
-  div.appendChild(published);
-  if (div.classList.contains('show')){
-    addVideo(data, div);
+  ul.appendChild(published);
+  if (ul.classList.contains('show')){
+    addVideo(data, ul);
   } else {
-    addDescription(data, div);
+    addDescription(data, ul);
   }
 }
 
-function addDescription(data, div){
-  var description = document.createElement('p');
-  description.classList.add('description');
+function addDescription(data, ul){
+  var description = document.createElement('li');
+  if (ul.classList.contains('list')) {
+    description.classList.add('list__item--description');
+  } else {
+    description.classList.add('show__item--description');
+  }
   var text = document.createTextNode(data.snippet.description);
   description.appendChild(text);
-  div.appendChild(description);
-  checkText(div, description);
-  if (div.classList.contains('list')){
-    addThumbnail(data, div);
+  ul.appendChild(description);
+  checkText(ul, description);
+  if (ul.classList.contains('list')){
+    addThumbnail(data, ul);
   }
 }
 
-function checkText(div, description){
-  if(div.classList.contains('list') && description.innerHTML.length >157) {
+function checkText(ul, description){
+  if(ul.classList.contains('list') && description.innerHTML.length >157) {
     description.innerHTML = description.innerHTML.substring(0,157)+'...';
   }
 }
 
-function addThumbnail(data, div){
+function addThumbnail(data, ul){
+  var li = document.createElement('li');
   var img = document.createElement('img');
+  img.classList.add('list__item--img');
+  li.appendChild(img);
   img.src = data.snippet.thumbnails.default.url;
   img.alt = data.snippet.title + ' Album artwork';
-  div.appendChild(img);
+  ul.appendChild(li);
 }
