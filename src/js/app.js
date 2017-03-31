@@ -23,7 +23,6 @@ function setUpPage(data){
   console.log(data);
   var main = document.getElementById('main');
   var title = document.createElement('h1');
-  // title.setAttribute('tabindex', '0');
   var parentDiv = document.createElement('div');
   title.classList.add('playlist-text');
   var text = document.createTextNode('My YouTube playlist');
@@ -31,7 +30,6 @@ function setUpPage(data){
   main.appendChild(parentDiv);
   parentDiv.appendChild(title);
   parentDiv.classList.add('parentDiv');
-  // parentDiv.setAttribute('tabindex', '0');
   createTile(parentDiv, data);
 }
 
@@ -54,7 +52,6 @@ function keyboardNavigation(data){
   });
 }
 
-
 function checkClass(e){
   var ul = document.getElementsByTagName('ul')[0];
 
@@ -63,9 +60,6 @@ function checkClass(e){
     setTimeout(function(){
       document.getElementsByClassName('button')[0].focus();
     },0);
-    // console.log('button', document.getElementsByClassName('button')[0])
-
-    // backButton.focus();
   }
 }
 
@@ -94,7 +88,6 @@ function addTitle(data, ul){
   title.appendChild(text);
   ul.appendChild(title);
   setDate(data, ul);
-  // addPublished(data, div);
 }
 
 function setDate(data, ul){
@@ -104,7 +97,6 @@ function setDate(data, ul){
   var monthIndex = date.getMonth();
   var year = date.getFullYear();
   var newDate = 'Published on ' + day + ' ' + months[monthIndex] + ', ' + year;
-  console.log('new', newDate);
   addPublished(newDate, data, ul);
 }
 
@@ -168,7 +160,6 @@ function backToButton(main){
     getData();
   };
 }
-
 
 function addPublished(newDate, data, ul){
   var published = document.createElement('li');
