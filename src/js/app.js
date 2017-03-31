@@ -39,7 +39,7 @@ function setUpPage(data){
 function keyboardNavigation(data){
   document.addEventListener('keydown', function(e){
     checkClass(e);
-    if (document.activeElement.id == 9) {
+    if (e.keyCode === 9 && document.activeElement.id === 9) {
       console.log('after 9', document.activeElement.parentNode.firstChild.nextSibling);
       document.activeElement.parentNode.firstChild.nextSibling.focus();
     }
@@ -124,9 +124,12 @@ function listenerFunction(data) {
 
 function openShowPage(main, data){
   backToButton(main);
+  var parentDiv = document.createElement('div');
+  parentDiv.classList.add('parentDiv');
+  main.appendChild(parentDiv);
   var ul = document.createElement('ul');
   ul.classList.add('show');
-  main.appendChild(ul);
+  parentDiv.appendChild(ul);
   addTitle(data, ul);
 }
 
@@ -201,8 +204,8 @@ function addDescription(data, ul){
 }
 
 function checkText(ul, description){
-  if(ul.classList.contains('list') && description.innerHTML.length >157) {
-    description.innerHTML = description.innerHTML.substring(0,157)+'...';
+  if(ul.classList.contains('list') && description.innerHTML.length >123) {
+    description.innerHTML = description.innerHTML.substring(0,123)+'...';
   }
 }
 

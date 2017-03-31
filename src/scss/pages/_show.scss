@@ -2,25 +2,25 @@
 
   list-style: none;
   background: #a5ffd6;
-  height: 230px;
-  padding-top: 3px;
+  height: 210px;
+  padding: 14px 0 0 0;
 
   &__item {
     width: 90%;
     float: left;
     @media screen and (min-width: $break-large) {
-    width: 40%;
-  }
+      width: 40%;
+    }
 
     &--title {
       margin-left: 18px;
       width: 280px;
       height: 31px;
-      font-family: 'Helvetica Bold', 'Helvetica';
+      font-family: 'Helvetica Bold',Helvetica;
       font-weight: 700;
       font-style: normal;
       font-size: 24px;
-      color: #5E5E5E;
+      color: #5e5e5e;
       line-height: 24px;
       @media screen and (min-width: $break-large) {
         // margin-left: 20px;
@@ -31,18 +31,25 @@
 
     &--published {
       margin-left: 18px;
+      margin-top: 25px;
+      margin-bottom: 15px;
       width: 280px;
       height: 26px;
-      font-family: 'Arial Bold', 'Arial';
+      font-family: 'Arial Bold',Arial;
       font-weight: 700;
       font-style: normal;
       font-size: 15px;
       color: #868686;
       line-height: 26px;
+      @media screen and (min-width: $break-large) {
+        margin-top: 0;
+      }
+
     }
 
     &--description {
       margin-left: 18px;
+      margin-top: 15px;
       width: 280px;
       height: 156px;
       font-size: 15px;

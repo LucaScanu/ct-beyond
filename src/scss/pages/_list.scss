@@ -39,9 +39,11 @@
 
       @media screen and (min-width: $break-large) {
         width: 41%;
-        height: 25px;
-        font-size: 24px;
+        height: 23px;
+        font-size: 26px;
+        line-height: 1.2;
         float: right;
+        margin-top: 13px;
         margin-bottom: 11px;
         clear: both;
       }
@@ -62,7 +64,7 @@
       @media screen and (min-width: $break-large) {
         float: right;
         padding: 0;
-        margin: 10px 0 0 0;
+        margin: 44px 0 0 0;
         width: 41%;
         clear: both;
         line-height: 26px;
@@ -73,11 +75,11 @@
       display: none;
       @media screen and (min-width: $break-large) {
         float: right;
-        margin: 25px 0 0 0;
+        margin: 54px 0 0 0;
         padding: 0;
         width: 41%;
         clear: both;
-        font-size: 15px;
+        font-size: 16px;
         color: #868686;
         line-height: 26px;
         display: block;
