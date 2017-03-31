@@ -1,9 +1,11 @@
 .show {
 
   list-style: none;
+  background: #a5ffd6;
+  height: 230px;
+  padding-top: 3px;
 
   &__item {
-
     width: 90%;
     float: left;
     @media screen and (min-width: $break-large) {

@@ -12,6 +12,16 @@
 
   &:focus {
     outline-color: $primary-color;
+
+    @-moz-document url-prefix() {
+      outline: 3px solid $primary-color;
+    }
+  }
+
+  &:active {
+    _::-webkit-:host:not(:root:root), .safari_only {
+      background: red;
+    }
   }
 
   &__item{
@@ -60,12 +70,7 @@
     }
 
     &--description {
-      @media screen and (max-width: $break-small){
-        display: none;
-      }
-      @media screen and (max-width: $break-large) {
-        display: none;
-      }
+      display: none;
       @media screen and (min-width: $break-large) {
         float: right;
         margin: 25px 0 0 0;

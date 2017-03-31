@@ -10,12 +10,12 @@ gulp.task('copy', function () {
   .src('src/*.html')
   .pipe(gulp.dest('public'));
 });
-
-gulp.task('copy', function () {
-  gulp
-  .src('src/images/**.**')
-  .pipe(gulp.dest('public/images'));
-});
+// 
+// gulp.task('copy', function () {
+//   gulp
+//   .src('src/images/**.**')
+//   .pipe(gulp.dest('public/images'));
+// });
 
 gulp.task('es6', () => {
   return gulp.src('src/js/*.js')

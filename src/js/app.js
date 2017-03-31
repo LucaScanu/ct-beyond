@@ -38,6 +38,7 @@ function setUpPage(data){
 
 function keyboardNavigation(data){
   document.addEventListener('keydown', function(e){
+    checkClass(e);
     if (document.activeElement.id == 9) {
       console.log('after 9', document.activeElement.parentNode.firstChild.nextSibling);
       document.activeElement.parentNode.firstChild.nextSibling.focus();
@@ -51,6 +52,21 @@ function keyboardNavigation(data){
       listenerFunction(data2);
     }
   });
+}
+
+
+function checkClass(e){
+  var ul = document.getElementsByTagName('ul')[0];
+
+  console.log('show ul', ul);
+  if (ul.classList.contains('show') && e.keyCode === 9) {
+    setTimeout(function(){
+      document.getElementsByClassName('button')[0].focus();
+    },0);
+    // console.log('button', document.getElementsByClassName('button')[0])
+
+    // backButton.focus();
+  }
 }
 
 function createTile(parentDiv, data){
@@ -83,7 +99,6 @@ function addTitle(data, ul){
 
 function setDate(data, ul){
   var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  // var num = new DateTime(data.snippet.publishedAt);
   var date = new Date(data.snippet.publishedAt);
   var day = date.getDate();
   var monthIndex = date.getMonth();
@@ -141,6 +156,8 @@ function addVideo(data, ul){
 
 function backToButton(main){
   var button = document.createElement('button');
+  button.classList.add('button');
+  button.setAttribute('tabindex', '0');
   button.innerHTML = '< Back to list of videos';
   main.appendChild(button);
   button.onclick = function() {
@@ -148,6 +165,7 @@ function backToButton(main){
     getData();
   };
 }
+
 
 function addPublished(newDate, data, ul){
   var published = document.createElement('li');
