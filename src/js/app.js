@@ -18,9 +18,7 @@ function getData(){
   req.send();
 }
 
-console.log('data array', globalData);
 function setUpPage(data){
-  console.log(data);
   var main = document.getElementById('main');
   var title = document.createElement('h1');
   var parentDiv = document.createElement('div');
@@ -36,26 +34,24 @@ function setUpPage(data){
 
 function keyboardNavigation(data){
   document.addEventListener('keydown', function(e){
-    checkClass(e);
+    console.log('key', e.keyCode);
+    console.log('active1', document.activeElement.id)
     if (e.keyCode === 9 && document.activeElement.id === 9) {
-      console.log('after 9', document.activeElement.parentNode.firstChild.nextSibling);
+      console.log('here')
+      console.log('after 9', document.activeElement.parentNode.firstChild.nextSibling)
       document.activeElement.parentNode.firstChild.nextSibling.focus();
     }
-    console.log('active', window.activeElement);
     if (e.keyCode === 13 && document.activeElement.classList.contains('list')) {
-      console.log('active', document.activeElement);
-      console.log('active id', document.activeElement.id);
       var i = document.activeElement.id;
       var data2 = data[0][i];
       listenerFunction(data2);
     }
+    checkClass(e);
   });
 }
 
 function checkClass(e){
   var ul = document.getElementsByTagName('ul')[0];
-
-  console.log('show ul', ul);
   if (ul.classList.contains('show') && e.keyCode === 9) {
     setTimeout(function(){
       document.getElementsByClassName('button')[0].focus();
@@ -79,11 +75,7 @@ function createTile(parentDiv, data){
 
 function addTitle(data, ul){
   var title = document.createElement('li');
-  if (ul.classList.contains('list')) {
-    title.classList.add('list__item--title');
-  } else {
-    title.classList.add('show__item--title');
-  }
+  addClass(ul, title, 'list__item--title', 'show__item--title');
   var text = document.createTextNode(data.snippet.title);
   title.appendChild(text);
   ul.appendChild(title);
@@ -123,10 +115,10 @@ function openShowPage(main, data){
   ul.classList.add('show');
   parentDiv.appendChild(ul);
   addTitle(data, ul);
+  // checkiFrame();
 }
 
 function addVideo(data, ul){
-  console.log('getting here');
   var li = document.createElement('li');
   li.classList.add('show__item');
   var videoId = data.contentDetails.videoId;
@@ -136,18 +128,20 @@ function addVideo(data, ul){
   li.appendChild(iframe);
   ul.appendChild(li);
   addDescription(data, ul);
+  checkiFrame(iframe)
   // setTimeout(checkiFrame.bind(null, iframe), 4000);
   // setTimeout(checkiFrame(iframe), 3000);
   // setTimeout('checkiFrame();', 100);
 }
 
-// function checkiFrame(iframe){
-//   if (  iframe.readyState  === 200 ) {
-//     console.log('iframe has loaded');
-//   } else {
-//     console.log('iframe hasnt loaded');
-//   }
-// }
+function checkiFrame(iframe){
+  console.log('iframe', iframe);
+  // if (  iframe.readyState  === 200 ) {
+  //   console.log('iframe has loaded');
+  // } else {
+  //   console.log('iframe hasnt loaded');
+  // }
+}
 
 function backToButton(main){
   var button = document.createElement('button');
@@ -163,11 +157,7 @@ function backToButton(main){
 
 function addPublished(newDate, data, ul){
   var published = document.createElement('li');
-  if (ul.classList.contains('list')) {
-    published.classList.add('list__item--published');
-  } else {
-    published.classList.add('show__item--published');
-  }
+  addClass(ul, published, 'list__item--published', 'show__item--published');
   var text = document.createTextNode(newDate);
   published.appendChild(text);
   ul.appendChild(published);
@@ -180,11 +170,7 @@ function addPublished(newDate, data, ul){
 
 function addDescription(data, ul){
   var description = document.createElement('li');
-  if (ul.classList.contains('list')) {
-    description.classList.add('list__item--description');
-  } else {
-    description.classList.add('show__item--description');
-  }
+  addClass(ul, description, 'list__item--description', 'show__item--description');
   var text = document.createTextNode(data.snippet.description);
   description.appendChild(text);
   ul.appendChild(description);
@@ -208,4 +194,12 @@ function addThumbnail(data, ul){
   img.src = data.snippet.thumbnails.default.url;
   img.alt = data.snippet.title + ' Album artwork';
   ul.appendChild(li);
+}
+
+function addClass(ul, element, listClass, showClass) {
+  if (ul.classList.contains('list')) {
+    element.classList.add(listClass);
+  } else {
+    element.classList.add(showClass);
+  }
 }
