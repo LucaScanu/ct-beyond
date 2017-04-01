@@ -1,5 +1,6 @@
 var globalData = [];
 getData();
+hoverTile();
 keyboardNavigation(globalData);
 
 function getData(){
@@ -20,13 +21,8 @@ function getData(){
 
 function setUpPage(data){
   var main = document.getElementById('main');
-  var title = document.createElement('h1');
   var parentDiv = document.createElement('div');
-  title.classList.add('playlist-text');
-  var text = document.createTextNode('My YouTube playlist');
-  title.appendChild(text);
   main.appendChild(parentDiv);
-  parentDiv.appendChild(title);
   parentDiv.classList.add('parentDiv');
   createTile(parentDiv, data);
 }
@@ -34,11 +30,7 @@ function setUpPage(data){
 
 function keyboardNavigation(data){
   document.addEventListener('keydown', function(e){
-    console.log('key', e.keyCode);
-    console.log('active1', document.activeElement.id)
     if (e.keyCode === 9 && document.activeElement.id === 9) {
-      console.log('here')
-      console.log('after 9', document.activeElement.parentNode.firstChild.nextSibling)
       document.activeElement.parentNode.firstChild.nextSibling.focus();
     }
     if (e.keyCode === 13 && document.activeElement.classList.contains('list')) {
@@ -128,19 +120,6 @@ function addVideo(data, ul){
   li.appendChild(iframe);
   ul.appendChild(li);
   addDescription(data, ul);
-  checkiFrame(iframe)
-  // setTimeout(checkiFrame.bind(null, iframe), 4000);
-  // setTimeout(checkiFrame(iframe), 3000);
-  // setTimeout('checkiFrame();', 100);
-}
-
-function checkiFrame(iframe){
-  console.log('iframe', iframe);
-  // if (  iframe.readyState  === 200 ) {
-  //   console.log('iframe has loaded');
-  // } else {
-  //   console.log('iframe hasnt loaded');
-  // }
 }
 
 function backToButton(main){
@@ -191,7 +170,7 @@ function addThumbnail(data, ul){
   var img = document.createElement('img');
   img.classList.add('list__item--img');
   li.appendChild(img);
-  img.src = data.snippet.thumbnails.default.url;
+  img.src = data.snippet.thumbnails.high.url;
   img.alt = data.snippet.title + ' Album artwork';
   ul.appendChild(li);
 }
@@ -202,4 +181,9 @@ function addClass(ul, element, listClass, showClass) {
   } else {
     element.classList.add(showClass);
   }
+}
+
+function hoverTile() {
+  const container = document.getElementsByTagName('main')[0];
+  // console.log(container);
 }

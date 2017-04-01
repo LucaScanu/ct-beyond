@@ -1,25 +1,11 @@
 const gulp        = require('gulp');
-const babel       = require('gulp-babel');
 const sass        = require('gulp-sass');
 const cleanCSS 	  = require('gulp-clean-css');
 const uglify      = require('gulp-uglify');
 const browserSync = require('browser-sync').create();
 
-// gulp.task('copy', function () {
-//   gulp
-//   .src('src/*.html')
-//   .pipe(gulp.dest('public'));
-// });
-
-gulp.task('copy', function () {
-  gulp
-  .src('src/images/**.**')
-  .pipe(gulp.dest('public/images'));
-});
-
-gulp.task('es6', () => {
-  return gulp.src('src/js/*.js')
-  .pipe(babel({ presets: ['es2015'] }))
+gulp.task('js', () => {
+  return gulp.src('src/js/app.js')
   .pipe(uglify())
   .pipe(gulp.dest('public/js'));
 });
@@ -31,17 +17,24 @@ gulp.task('sass', () => {
   .pipe(gulp.dest('public/css'));
 });
 
-gulp.task('serve', ['es6', 'sass'], () => {
+gulp.task('images', () => {
+  gulp
+  .src('src/images/**.**')
+  .pipe(gulp.dest('public/images'));
+});
+
+gulp.task('serve', ['js', 'sass'], () => {
   browserSync.init({
+    files: ['public/**/*.*'],
+    reloadDelay: 500,
     server: {
-      baseDir: './public'
+      baseDir: './'
     }
   });
 });
 
-gulp.task('default', ['sass', 'serve', 'copy', 'copy'], () => {
+gulp.task('default', ['js', 'sass', 'images', 'serve'], () => {
   gulp.watch('src/scss/**/*.scss', ['sass']);
-  gulp.watch('src/js/*.js', ['es6']);
-  gulp.watch('src/*.html').on('change', browserSync.reload);
-  gulp.watch('public/css/*.css').on('change', browserSync.reload);
+  gulp.watch('src/js/app.js', ['js']);
+  gulp.watch('index.html', browserSync.reload());
 });
