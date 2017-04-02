@@ -36,79 +36,74 @@
         outline: 3px solid $primary-color;
       }
     }
+  }
+  
+  &--title {
+    margin: 10px 0 0 15px;
+    width: 300px;
+    height: 17px;
 
-    &:active {
-      _::-webkit-:host:not(:root:root), .safari_only {
-        background: red;
-      }
-    }
+    font-weight: 700;
+    font-size: 1.125em;
+    color: #5e5e5e;
+    line-height: 20px;
 
-    &--title {
-      margin: 10px 0 0 15px;
-      width: 300px;
-      height: 17px;
-
-      font-weight: 700;
-      font-size: 1.125em;
-      color: #5e5e5e;
-      line-height: 20px;
-
-      @media screen and (min-width: $break-large) {
-        width: 41%;
-        height: 23px;
-        font-size: 26px;
-        line-height: 1.2;
-        float: right;
-      }
-    }
-
-    &--published {
-      margin-left: 15px;
-      margin-top: 21px;
-      width: 280px;
-      margin-bottom: 11px;
-      height: 8px;
-      font-weight: 700;
-      font-style: normal;
-      font-size: 15px;
-      color: #868686;
-      line-height: 5px;
-      @media screen and (min-width: $break-large) {
-        float: right;
-        padding: 0;
-        margin: 44px 0 0 0;
-        width: 41%;
-        clear: both;
-        line-height: 26px;
-      }
-    }
-
-    &--description {
-      display: none;
-      @media screen and (min-width: $break-large) {
-        float: right;
-        margin: 54px 0 0 0;
-        padding: 0;
-        width: 41%;
-        clear: both;
-        font-size: 16px;
-        color: #868686;
-        line-height: 26px;
-        display: block;
-
-      }
-    }
-
-    &--img {
-      width: 91%;
-      height: 210px;
-      margin-left: 15px;
-      @media screen and (min-width: $break-large) {
-        width: 55%;
-        height: 260px;
-        margin-left: 10px;
-        margin-top: 10px;
-      }
+    @media screen and (min-width: $break-large) {
+      width: 41%;
+      height: 23px;
+      font-size: 26px;
+      line-height: 1.2;
+      float: right;
     }
   }
+
+  &--published {
+    margin-left: 15px;
+    margin-top: 21px;
+    width: 280px;
+    margin-bottom: 11px;
+    height: 8px;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 15px;
+    color: #868686;
+    line-height: 5px;
+    @media screen and (min-width: $break-large) {
+      float: right;
+      padding: 0;
+      margin: 44px 0 0 0;
+      width: 41%;
+      clear: both;
+      line-height: 26px;
+    }
+  }
+
+  &--description {
+    display: none;
+    @media screen and (min-width: $break-large) {
+      float: right;
+      margin: 54px 0 0 0;
+      padding: 0;
+      width: 41%;
+      clear: both;
+      font-size: 16px;
+      color: #868686;
+      line-height: 26px;
+      display: block;
+
+    }
+  }
+
+  &--img {
+    width: 91%;
+    height: 210px;
+    margin-left: 15px;
+    @media screen and (min-width: $break-large) {
+      width: 55%;
+      height: 260px;
+      margin-left: 10px;
+      margin-top: 10px;
+    }
+  }
+}
 }

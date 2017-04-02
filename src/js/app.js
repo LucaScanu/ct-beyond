@@ -145,6 +145,10 @@ Player.backToButton = function backToButton() {
   button.setAttribute('tabindex', '0');
   button.innerHTML = '< Back to list of videos';
   Player.header.appendChild(button);
+  Player.buttonClick(button);
+};
+
+Player.buttonClick = function buttonClick(button){
   button.addEventListener('click', function() {
     Player.mainElement.innerHTML = '';
     button.style.display = 'none';
