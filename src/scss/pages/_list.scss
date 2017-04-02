@@ -1,30 +1,44 @@
 .list {
-  border: 1px solid #d0d0d0;
-  width: 85%;
-  height: 280px;
-  margin-bottom: 10px;
-  cursor: pointer;
   list-style: none;
   padding: 0;
-  @media only screen and (min-width: 481px) {
-    min-width: 411px;
-  }
+  margin: 0;
 
-  &:focus {
-    outline-color: $primary-color;
-
-    @-moz-document url-prefix() {
-      outline: 3px solid $primary-color;
-    }
-  }
-
-  &:active {
-    _::-webkit-:host:not(:root:root), .safari_only {
-      background: red;
-    }
-  }
 
   &__item{
+    border: 1px solid #d0d0d0;
+    width: 85%;
+    height: 280px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    list-style: none;
+    padding: 0;
+    transform: scale(.9);
+    transition: transform 1s;
+    @media only screen and (min-width: 481px) {
+      min-width: 411px;
+    }
+
+    &:hover, &:focus {
+      transform: scale(1);
+      outline-color: $primary-color;
+    }
+
+
+    // &:focus {
+    //   outline-color: $primary-color;
+    //
+    //   @-moz-document url-prefix() {
+    //     outline: 3px solid $primary-color;
+    //   }
+    // }
+
+    &:active {
+      _::-webkit-:host:not(:root:root), .safari_only {
+        background: red;
+      }
+    }
+
+
     &--title {
       margin-left: 15px;
       margin-top: 10px;

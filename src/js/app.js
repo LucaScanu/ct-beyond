@@ -1,189 +1,169 @@
-var globalData = [];
-getData();
-hoverTile();
-keyboardNavigation(globalData);
+var Player = Player || {};
 
-function getData(){
-  var req = new XMLHttpRequest();
-  req.open('GET', 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails,status&maxResults=10&playlistId=PLSi28iDfECJPJYFA4wjlF5KUucFvc0qbQ&key=AIzaSyCuv_16onZRx3qHDStC-FUp__A6si-fStw');
+Player.init = function init() {
+  this.data          = [];
+  this.mainElement   = document.getElementsByTagName('main')[0];
+  this.listContainer = document.createElement('ul');
+
+  this.getData();
+  this.keyboardNavigation(this.data);
+};
+
+Player.getData = function getData() {
+  const apiUrl = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails,status&maxResults=10&playlistId=PLSi28iDfECJPJYFA4wjlF5KUucFvc0qbQ&key=AIzaSyCuv_16onZRx3qHDStC-FUp__A6si-fStw';
+
+  const req = new XMLHttpRequest();
+  req.open('GET', apiUrl);
   req.onload = function() {
     if (req.status === 200) {
-      var data = req.responseText;
-      var jsonResponse = JSON.parse(data);
-      setUpPage(jsonResponse.items);
-      globalData.push(jsonResponse.items);
+      const jsonResponse = JSON.parse(req.responseText);
+      Player.data.push(jsonResponse.items);
+      Player.appendDataToPage();
     } else {
-      console.log('Request failed.  Returned status of ' + req.status);
+      console.log('Request failed. Retuened status of ' + req.status);
     }
   };
   req.send();
-}
+};
 
-function setUpPage(data){
-  var main = document.getElementById('main');
-  var parentDiv = document.createElement('div');
-  main.appendChild(parentDiv);
-  parentDiv.classList.add('parentDiv');
-  createTile(parentDiv, data);
-}
+Player.appendDataToPage = function appendDataToPage() {
+  Player.listContainer.classList.add('list');
+  Player.mainElement.appendChild(Player.listContainer);
+  Player.createTile();
+};
 
+Player.createTile = function createTile() {
+  Player.data[0].forEach(function(data, index) {
+    const li = document.createElement('li');
+    li.setAttribute('id', index);
+    li.setAttribute('tabindex', '0');
+    li.setAttribute('role', 'link');
+    li.classList.add('list__item', 'col-s-9', 'col-m-8', 'col-l-7');
+    Player.addTitle(data, li);
+  });
+};
 
-function keyboardNavigation(data){
+Player.addClass = function addClass(li, element, listClass, showClass) {
+  li.classList.contains('list__item') ? element.classList.add(listClass) : element.classList.add(showClass);
+};
+
+Player.addTitle = function addTitle(data, li) {
+  const title = document.createElement('h2');
+  Player.addClass(li, title, 'list__item--title', 'show__item--title');
+  const text = document.createTextNode(data.snippet.title);
+  title.appendChild(text);
+  li.appendChild(title);
+  Player.convertDate(data, li);
+};
+
+Player.convertDate = function convertData(data, li) {
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const date = new Date(data.snippet.publishedAt);
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
+  const convertedDateString = 'Published on ' + day + ' ' + months[monthIndex] + ', ' + year;
+  Player.addPublished(convertedDateString, data, li);
+};
+
+Player.addPublished = function addPublished(date, data, li) {
+  const published = document.createElement('h3');
+  Player.addClass(li, published, 'list__item--published', 'show__item--published');
+  const text = document.createTextNode(date);
+  published.appendChild(text);
+  li.appendChild(published);
+  li.classList.contains('show__item') ? Player.addVideo(data, li) : Player.addDescription(data, li);
+};
+
+Player.addVideo = function addVideo(data, li) {
+  const videoId = data.contentDetails.videoId;
+  const iframe = document.createElement('iframe');
+  iframe.classList.add('show__item--iframe');
+  iframe.src = 'https://www.youtube.com/embed/' + videoId;
+  li.appendChild(iframe);
+  Player.addDescription(data, li);
+};
+
+Player.addDescription = function addDescription(data, li) {
+  const pElement = document.createElement('p');
+  Player.addClass(li, pElement, 'list__item--description', 'show__item--description');
+  const text = document.createTextNode(data.snippet.description);
+  pElement.appendChild(text);
+  li.appendChild(pElement);
+  Player.checkText(li, pElement);
+  if (li.classList.contains('list__item')){
+    Player.addThumbnail(data, li);
+  }
+};
+
+Player.checkText = function checkText(li, element) {
+  if(li.classList.contains('list__item') && element.innerHTML.length >123) {
+    element.innerHTML = element.innerHTML.substring(0,123)+'...';
+  }
+};
+
+Player.addThumbnail = function addThumbnail(data, li) {
+  const img = document.createElement('img');
+  img.classList.add('list__item--img');
+  img.src = data.snippet.thumbnails.high.url;
+  img.alt = data.snippet.title + ' Album artwork';
+  li.appendChild(img);
+  Player.appendTileToPage(data, li);
+};
+
+Player.appendTileToPage = function appendTileToPage(data, li) {
+  Player.listContainer.append(li);
+
+  li.addEventListener('click', function() {
+    Player.openShowPage(data);
+  });
+};
+
+Player.openShowPage = function openShowPage(data) {
+  Player.mainElement.innerHTML = '';
+  Player.backToButton();
+  const ul = document.createElement('ul');
+  Player.mainElement.appendChild(ul);
+  ul.classList.add('show');
+  const li = document.createElement('li');
+  li.classList.add('show__item');
+  ul.appendChild(li);
+  Player.addTitle(data, li);
+};
+
+Player.backToButton = function backToButton() {
+  const button = document.createElement('button');
+  button.classList.add('button');
+  button.setAttribute('tabindex', '0');
+  button.innerHTML = '< Back to list of videos';
+  Player.mainElement.appendChild(button);
+  button.onclick = function() {
+    Player.mainElement.innerHTML = '';
+    Player.mainElement.appendChild(Player.listContainer);
+  };
+};
+
+Player.keyboardNavigation = function keyboardNavigation(data) {
   document.addEventListener('keydown', function(e){
     if (e.keyCode === 9 && document.activeElement.id === 9) {
       document.activeElement.parentNode.firstChild.nextSibling.focus();
     }
-    if (e.keyCode === 13 && document.activeElement.classList.contains('list')) {
+    if (e.keyCode === 13 && document.activeElement.classList.contains('list__item')) {
       var i = document.activeElement.id;
       var data2 = data[0][i];
-      listenerFunction(data2);
+      Player.openShowPage(data2);
     }
-    checkClass(e);
+    Player.checkClass(e);
   });
-}
+};
 
-function checkClass(e){
+Player.checkClass = function checkClass(e) {
   var ul = document.getElementsByTagName('ul')[0];
   if (ul.classList.contains('show') && e.keyCode === 9) {
     setTimeout(function(){
       document.getElementsByClassName('button')[0].focus();
     },0);
   }
-}
+};
 
-function createTile(parentDiv, data){
-  var idCounter = 0;
-  data.forEach(function(data){
-    var ul = document.createElement('ul');
-    ul.classList.add('list', 'col-s-9', 'col-m-8', 'col-l-7');
-    ul.setAttribute('id', idCounter++);
-    ul.setAttribute('tabindex', '0');
-    ul.setAttribute('role', 'ulnk');
-    parentDiv.appendChild(ul);
-    addListener(ul, data);
-    addTitle(data, ul);
-  });
-}
-
-function addTitle(data, ul){
-  var title = document.createElement('li');
-  addClass(ul, title, 'list__item--title', 'show__item--title');
-  var text = document.createTextNode(data.snippet.title);
-  title.appendChild(text);
-  ul.appendChild(title);
-  setDate(data, ul);
-}
-
-function setDate(data, ul){
-  var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  var date = new Date(data.snippet.publishedAt);
-  var day = date.getDate();
-  var monthIndex = date.getMonth();
-  var year = date.getFullYear();
-  var newDate = 'Published on ' + day + ' ' + months[monthIndex] + ', ' + year;
-  addPublished(newDate, data, ul);
-}
-
-function addListener(ul, data){
-  if (ul) {
-    ul.onclick = function(){
-      listenerFunction(data);
-    };
-  }
-}
-
-function listenerFunction(data) {
-  var main = document.getElementById('main');
-  main.innerHTML = '';
-  openShowPage(main, data);
-}
-
-function openShowPage(main, data){
-  backToButton(main);
-  var parentDiv = document.createElement('div');
-  parentDiv.classList.add('parentDiv');
-  main.appendChild(parentDiv);
-  var ul = document.createElement('ul');
-  ul.classList.add('show');
-  parentDiv.appendChild(ul);
-  addTitle(data, ul);
-  // checkiFrame();
-}
-
-function addVideo(data, ul){
-  var li = document.createElement('li');
-  li.classList.add('show__item');
-  var videoId = data.contentDetails.videoId;
-  var iframe = document.createElement('iframe');
-  iframe.classList.add('show__item--iframe');
-  iframe.src = 'https://www.youtube.com/embed/' + videoId;
-  li.appendChild(iframe);
-  ul.appendChild(li);
-  addDescription(data, ul);
-}
-
-function backToButton(main){
-  var button = document.createElement('button');
-  button.classList.add('button');
-  button.setAttribute('tabindex', '0');
-  button.innerHTML = '< Back to list of videos';
-  main.appendChild(button);
-  button.onclick = function() {
-    main.innerHTML = '';
-    getData();
-  };
-}
-
-function addPublished(newDate, data, ul){
-  var published = document.createElement('li');
-  addClass(ul, published, 'list__item--published', 'show__item--published');
-  var text = document.createTextNode(newDate);
-  published.appendChild(text);
-  ul.appendChild(published);
-  if (ul.classList.contains('show')){
-    addVideo(data, ul);
-  } else {
-    addDescription(data, ul);
-  }
-}
-
-function addDescription(data, ul){
-  var description = document.createElement('li');
-  addClass(ul, description, 'list__item--description', 'show__item--description');
-  var text = document.createTextNode(data.snippet.description);
-  description.appendChild(text);
-  ul.appendChild(description);
-  checkText(ul, description);
-  if (ul.classList.contains('list')){
-    addThumbnail(data, ul);
-  }
-}
-
-function checkText(ul, description){
-  if(ul.classList.contains('list') && description.innerHTML.length >123) {
-    description.innerHTML = description.innerHTML.substring(0,123)+'...';
-  }
-}
-
-function addThumbnail(data, ul){
-  var li = document.createElement('li');
-  var img = document.createElement('img');
-  img.classList.add('list__item--img');
-  li.appendChild(img);
-  img.src = data.snippet.thumbnails.high.url;
-  img.alt = data.snippet.title + ' Album artwork';
-  ul.appendChild(li);
-}
-
-function addClass(ul, element, listClass, showClass) {
-  if (ul.classList.contains('list')) {
-    element.classList.add(listClass);
-  } else {
-    element.classList.add(showClass);
-  }
-}
-
-function hoverTile() {
-  const container = document.getElementsByTagName('main')[0];
-  // console.log(container);
-}
+Player.init();
