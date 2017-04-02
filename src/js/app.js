@@ -75,6 +75,7 @@ Player.addVideo = function addVideo(data, li) {
   const videoId = data.contentDetails.videoId;
   const iframe = document.createElement('iframe');
   iframe.classList.add('show__item--iframe');
+  Player.setElementAttributes(iframe, {'alt': 'Video of ' + data.snippet.title});
   iframe.src = 'https://www.youtube.com/embed/' + videoId;
   li.appendChild(iframe);
   Player.addDescription(data, li);
