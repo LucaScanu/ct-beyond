@@ -117,6 +117,22 @@ Player.appendTileToPage = function appendTileToPage(data, li) {
   li.addEventListener('click', function() {
     Player.openShowPage(data);
   });
+
+  li.addEventListener('mouseover', function(e) {
+    const lis = Player.listContainer.childNodes;
+    lis.forEach(function(li) {
+      if(li.id !== e.target.id) {
+        li.style.opacity = '.2';
+      }
+    });
+  });
+
+  li.addEventListener('mouseout', function() {
+    const lis = Player.listContainer.childNodes;
+    lis.forEach(function(li) {
+      li.style.opacity = '1';
+    });
+  });
 };
 
 Player.openShowPage = function openShowPage(data) {

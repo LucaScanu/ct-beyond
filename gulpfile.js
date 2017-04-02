@@ -17,12 +17,6 @@ gulp.task('sass', () => {
   .pipe(gulp.dest('public/css'));
 });
 
-gulp.task('images', () => {
-  gulp
-  .src('src/images/**.**')
-  .pipe(gulp.dest('public/images'));
-});
-
 gulp.task('serve', ['js', 'sass'], () => {
   browserSync.init({
     files: ['public/**/*.*'],
@@ -33,7 +27,7 @@ gulp.task('serve', ['js', 'sass'], () => {
   });
 });
 
-gulp.task('default', ['js', 'sass', 'images', 'serve'], () => {
+gulp.task('default', ['js', 'sass', 'serve'], () => {
   gulp.watch('src/scss/**/*.scss', ['sass']);
   gulp.watch('src/js/app.js', ['js']);
   gulp.watch('index.html', browserSync.reload());

@@ -13,24 +13,23 @@
     list-style: none;
     padding: 0;
     transform: scale(.9);
-    transition: transform 1s;
+    transition: transform 1s, opacity 1s;
     @media only screen and (min-width: 481px) {
       min-width: 411px;
     }
 
-    &:hover, &:focus {
+    &:hover {
       transform: scale(1);
-      outline-color: $primary-color;
     }
 
+    &:focus {
+      transform: scale(1);
+      outline-color: $primary-color;
 
-    // &:focus {
-    //   outline-color: $primary-color;
-    //
-    //   @-moz-document url-prefix() {
-    //     outline: 3px solid $primary-color;
-    //   }
-    // }
+      @-moz-document url-prefix() {
+        outline: 3px solid $primary-color;
+      }
+    }
 
     &:active {
       _::-webkit-:host:not(:root:root), .safari_only {
@@ -38,7 +37,7 @@
       }
     }
 
-
+    
     &--title {
       margin-left: 15px;
       margin-top: 10px;
