@@ -7,6 +7,10 @@ body {
   @include fontSmoothing();
 }
 
+main {
+  transition: opacity 3s;
+}
+
 .header {
   padding: 10px;
   background: #333577;
@@ -14,29 +18,5 @@ body {
 
   &__heading {
     margin-left: 20px;
-  }
-}
-
-button {
-  margin-left: 18px;
-  text-decoration: underline;
-  border: none;
-  background: none;
-  height: 26px;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 15px;
-  text-decoration: underline;
-  color: #868686;
-  line-height: 26px;
-  cursor: pointer;
-  padding: 20px 0 33px 0;
-
-  &:focus {
-    outline-color: $primary-color;
-
-    @-moz-document url-prefix() {
-      outline: 3px solid $primary-color;
-    }
   }
 }

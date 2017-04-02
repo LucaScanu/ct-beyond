@@ -1,0 +1,22 @@
+button {
+  margin-left: 18px;
+  text-decoration: underline;
+  border: none;
+  background: 0 0;
+  height: 26px;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 16px;
+  text-decoration: underline;
+  color: #fff;
+  line-height: 15px;
+  cursor: pointer;
+  padding: 20px 0 33px 0;
+  &:focus {
+    outline-color: #fff;
+
+    @-moz-document url-prefix() {
+      outline: 3px solid #fff;
+    }
+  }
+}

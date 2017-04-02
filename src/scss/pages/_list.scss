@@ -30,6 +30,7 @@
     &:focus {
       transform: scale(1);
       outline-color: $primary-color;
+      background: #fff;
 
       @-moz-document url-prefix() {
         outline: 3px solid $primary-color;

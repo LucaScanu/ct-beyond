@@ -1,22 +1,20 @@
 var Player = Player || {};
 
 Player.init = function init() {
-  this.data          = [];
-  this.mainElement   = document.getElementsByTagName('main')[0];
-  this.listContainer = document.createElement('ul');
-  this.header        = document.getElementsByClassName('header')[0];
-  this.headerTitle   = document.getElementsByClassName('header__heading')[0];
+  Player.data          = [];
+  Player.mainElement   = document.getElementsByTagName('main')[0];
+  Player.listContainer = document.createElement('ul');
+  Player.header        = document.getElementsByClassName('header')[0];
+  Player.headerTitle   = document.getElementsByClassName('header__heading')[0];
+  Player.apiUrl        = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails,status&maxResults=10&playlistId=PLSi28iDfECJPJYFA4wjlF5KUucFvc0qbQ&key=AIzaSyCuv_16onZRx3qHDStC-FUp__A6si-fStw';
 
-  this.getData();
-  this.keyboardNavigation(this.data);
+  Player.getData();
+  Player.keyboardNavigation(Player.data);
 };
 
 Player.getData = function getData() {
-  const apiUrl = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails,status&maxResults=10&playlistId=PLSi28iDfECJPJYFA4wjlF5KUucFvc0qbQ&key=AIzaSyCuv_16onZRx3qHDStC-FUp__A6si-fStw';
-
   const req = new XMLHttpRequest();
-  req.open('GET', apiUrl);
-  req.setRequestHeader('Cache-Control', 'max-age=3600');
+  req.open('GET', Player.apiUrl);
   req.onload = function() {
     if (req.status === 200) {
       const jsonResponse = JSON.parse(req.responseText);
@@ -38,10 +36,7 @@ Player.appendDataToPage = function appendDataToPage() {
 Player.createTile = function createTile() {
   Player.data[0].forEach(function(data, index) {
     const li = document.createElement('li');
-    li.setAttribute('id', index);
-    li.setAttribute('tabindex', '0');
-    li.setAttribute('role', 'link');
-    li.classList.add('list__item', 'col-s-9', 'col-m-8', 'col-l-7');
+    Player.setElementAttributes(li, {'id': index, 'tabindex': '0', 'role': 'link', 'class': 'list__item col-s-9 col-m-8 col-l-7'});
     Player.addTitle(data, li);
   });
 };
@@ -53,8 +48,7 @@ Player.addClass = function addClass(li, element, listClass, showClass) {
 Player.addTitle = function addTitle(data, li) {
   const title = document.createElement('h2');
   Player.addClass(li, title, 'list__item--title', 'show__item--title');
-  const text = document.createTextNode(data.snippet.title);
-  title.appendChild(text);
+  title.innerHTML = data.snippet.title;
   li.appendChild(title);
   Player.convertDate(data, li);
 };
@@ -72,8 +66,7 @@ Player.convertDate = function convertData(data, li) {
 Player.addPublished = function addPublished(date, data, li) {
   const published = document.createElement('h3');
   Player.addClass(li, published, 'list__item--published', 'show__item--published');
-  const text = document.createTextNode(date);
-  published.appendChild(text);
+  published.innerHTML = date;
   li.appendChild(published);
   li.classList.contains('show__item') ? Player.addVideo(data, li) : Player.addDescription(data, li);
 };
@@ -90,19 +83,14 @@ Player.addVideo = function addVideo(data, li) {
 Player.addDescription = function addDescription(data, li) {
   const pElement = document.createElement('p');
   Player.addClass(li, pElement, 'list__item--description', 'show__item--description');
-  const text = document.createTextNode(data.snippet.description);
-  pElement.appendChild(text);
+  pElement.innerHTML = data.snippet.description;
   li.appendChild(pElement);
   Player.checkText(li, pElement);
-  if (li.classList.contains('list__item')){
-    Player.addThumbnail(data, li);
-  }
+  if (li.classList.contains('list__item')) Player.addThumbnail(data, li);
 };
 
 Player.checkText = function checkText(li, element) {
-  if(li.classList.contains('list__item') && element.innerHTML.length >123) {
-    element.innerHTML = element.innerHTML.substring(0,123)+'...';
-  }
+  if(li.classList.contains('list__item') && element.innerHTML.length >123) element.innerHTML = element.innerHTML.substring(0,123)+'...';
 };
 
 Player.addThumbnail = function addThumbnail(data, li) {
@@ -157,12 +145,12 @@ Player.backToButton = function backToButton() {
   button.setAttribute('tabindex', '0');
   button.innerHTML = '< Back to list of videos';
   Player.header.appendChild(button);
-  button.onclick = function() {
+  button.addEventListener('click', function() {
     Player.mainElement.innerHTML = '';
     button.style.display = 'none';
     Player.headerTitle.style.display = 'block';
     Player.mainElement.appendChild(Player.listContainer);
-  };
+  });
 };
 
 Player.keyboardNavigation = function keyboardNavigation(data) {
@@ -185,6 +173,12 @@ Player.checkClass = function checkClass(e) {
     setTimeout(function(){
       document.getElementsByClassName('button')[0].focus();
     },0);
+  }
+};
+
+Player.setElementAttributes = function setElementAttributes(element, attributes) {
+  for(var key in attributes) {
+    element.setAttribute(key, attributes[key]);
   }
 };
 
