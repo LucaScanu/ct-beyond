@@ -1,9 +1,6 @@
 .show {
-
   list-style: none;
-  background: #a5ffd6;
-  height: 210px;
-  padding: 14px 0 0 0;
+  padding: 0;
 
   &__item {
     width: 100%;
@@ -22,7 +19,6 @@
       color: #5e5e5e;
       line-height: 24px;
       @media screen and (min-width: $break-large) {
-        // margin-left: 20px;
         margin-top: 18px;
         width: 480px;
       }

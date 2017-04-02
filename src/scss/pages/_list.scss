@@ -1,26 +1,31 @@
 .list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 10px 0;
 
+  li * {
+    pointer-events: none;
+  }
 
   &__item{
-    border: 1px solid #d0d0d0;
+    border: 1px solid #e6e6e6;
     width: 85%;
     height: 280px;
     margin-bottom: 10px;
     cursor: pointer;
     list-style: none;
     padding: 0;
-    transform: scale(.9);
-    transition: transform 1s, opacity 1s;
+    @include li-transform(.9);
+    @include li-transition();
     @media only screen and (min-width: 481px) {
       min-width: 411px;
     }
 
     &:hover {
-      transform: scale(1);
+      @include li-transform(1);
+      background: #fff;
     }
+
 
     &:focus {
       transform: scale(1);
@@ -37,14 +42,12 @@
       }
     }
 
-    
     &--title {
-      margin-left: 15px;
-      margin-top: 10px;
+      margin: 10px 0 0 15px;
       width: 300px;
       height: 17px;
+
       font-weight: 700;
-      font-style: normal;
       font-size: 1.125em;
       color: #5e5e5e;
       line-height: 20px;
@@ -55,9 +58,6 @@
         font-size: 26px;
         line-height: 1.2;
         float: right;
-        margin-top: 13px;
-        margin-bottom: 11px;
-        clear: both;
       }
     }
 

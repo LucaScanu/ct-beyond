@@ -1,0 +1,20 @@
+@mixin fontSmoothing() {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin li-transition() {
+  -webkit-transition: transform 1s, opacity 1s;
+     -moz-transition: transform 1s, opacity 1s;
+      -ms-transition: transform 1s, opacity 1s;
+       -o-transition: transform 1s, opacity 1s;
+          transition: transform 1s, opacity 1s;
+}
+
+@mixin li-transform($value) {
+  -webkit-transform: scale($value);
+     -moz-transform: scale($value);
+      -ms-transform: scale($value);
+       -o-transform: scale($value);
+          transform: scale($value);
+}

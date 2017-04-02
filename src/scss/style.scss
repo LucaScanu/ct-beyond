@@ -1,11 +1,7 @@
 @import "variables";
+@import "mixin";
 @import "main";
 
 @import "pages/list";
 @import "pages/show";
 @import "pages/grid";
-
-
-.list li * {
-  pointer-events: none;
-}

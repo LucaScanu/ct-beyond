@@ -4,6 +4,8 @@ Player.init = function init() {
   this.data          = [];
   this.mainElement   = document.getElementsByTagName('main')[0];
   this.listContainer = document.createElement('ul');
+  this.header        = document.getElementsByClassName('header')[0];
+  this.headerTitle   = document.getElementsByClassName('header__heading')[0];
 
   this.getData();
   this.keyboardNavigation(this.data);
@@ -148,13 +150,16 @@ Player.openShowPage = function openShowPage(data) {
 };
 
 Player.backToButton = function backToButton() {
+  Player.headerTitle.style.display = 'none';
   const button = document.createElement('button');
   button.classList.add('button');
   button.setAttribute('tabindex', '0');
   button.innerHTML = '< Back to list of videos';
-  Player.mainElement.appendChild(button);
+  Player.header.appendChild(button);
   button.onclick = function() {
     Player.mainElement.innerHTML = '';
+    button.style.display = 'none';
+    Player.headerTitle.style.display = 'block';
     Player.mainElement.appendChild(Player.listContainer);
   };
 };
