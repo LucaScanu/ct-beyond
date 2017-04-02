@@ -16,6 +16,7 @@ Player.getData = function getData() {
 
   const req = new XMLHttpRequest();
   req.open('GET', apiUrl);
+  req.setRequestHeader('Cache-Control', 'max-age=3600');
   req.onload = function() {
     if (req.status === 200) {
       const jsonResponse = JSON.parse(req.responseText);
